@@ -21,7 +21,7 @@ Onde:
 - **GroupId**: Um nome único que identifica o projeto e pode representar a empresa ou instituição.
 - **ArtifactId**: Nome do arquivo JAR.
 
-## 1.2 Gerenciamento de build com a ferramenta Maven
+## 1.2 Gerenciamento de build com o Maven
 
 Após a criação do projeto utilizando o comando:
 
@@ -32,7 +32,7 @@ Onde:
 - **GroupId**: pt.ua.deti
 - **ArtifactId**: MyWeatherRadar
 
-Importa-se os códigos disponibilizados pelo regente para o consumo da API e, em seguida, realiza as devidas alterações das dependências do Maven no POM.xml para o funcionamento correto da aplicação.
+Importa-se os códigos disponibilizados pelo regente para o consumo da API e, em seguida, realiza as devidas alterações das dependências do Maven no `POM.xml` para o funcionamento correto da aplicação.
 
 **API:** http://api.ipma.pt/
 
@@ -43,9 +43,9 @@ Em seguida, compila e executa o projeto através da linha de comando:
 - `$ mvn package`
 - `$ mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter"`
 
-### K) Alterando a implementação para receber o código da cidade como um parâmetro na linha de comando e imprimir as informações da previsão de forma mais completa e amigável ao usuário.
+#### K) Change the implementation to receive the city code as a parameter in the command line and print the forecast information in a more complete and user-friendly way.
 
-- Exemplo: `mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="100"`
+- Exemplo: mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" `-Dexec.args="100"`
 
 Isso permitirá que o usuário receba informações sobre a cidade com o código 100.
 
@@ -70,7 +70,7 @@ Isso permitirá que o usuário receba informações sobre a cidade com o código
 - `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
 - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
 
-**Instalação do pacote:**
+**Instalação do package:**
 
 - `sudo apt-get install ./docker-desktop-4.23.0-amd64.deb`
 
@@ -83,9 +83,9 @@ Isso permitirá que o usuário receba informações sobre a cidade com o código
 - `docker volume create portainer_data`
 - `docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`
 - `docker ps`
+- `docker ps -all`
 
-
-
+**$ docker ps**
 <pre>
 CONTAINER ID   IMAGE                           COMMAND        CREATED          STATUS          PORTS                                                      NAMES
 a698f35562d4   portainer/portainer-ce:latest   "/portainer"   19 minutes ago   Up 19 minutes   0.0.0.0:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, 9000/tcp   portainer
@@ -103,10 +103,17 @@ Primeiro, foram implementados 4 arquivos:
 - `Dockerfile`
 - `docker-compose.yaml`
 
-Em seguida, foi adicionado ao `docker-compose.yaml` código para realizar o *bind mount*.
+Em seguida, foi adicionado ao `compose.yaml` código para realizar o *bind mount*.
 
-- *Bind mount*: Isso garante que o processo de reconstrução não seja necessário. Ou seja, quando o código-fonte for alterado, ele será imediatamente atualizado para o cliente.
+- *Bind mount*: Isso garante que o processo de rebuild não seja necessário. Ou seja, quando o código-fonte for alterado, ele será imediatamente atualizado para o cliente.
 
+**$ docker ps**
+
+<pre>
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+8bcace130e69   ex1_4-web      "flask run"              20 seconds ago   Up 18 seconds   0.0.0.0:8000->5000/tcp   ex1_4-web-1
+2f9d3c24a177   redis:alpine   "docker-entrypoint.s…"   20 seconds ago   Up 18 seconds   6379/tcp                 ex1_4-redis-1
+</pre>
 
 
 
