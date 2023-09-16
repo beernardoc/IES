@@ -3,5 +3,4 @@
 
 Practical classes
 
-- Bernardo Pinto
-- 105926
+- Bernardo Pinto - 105926

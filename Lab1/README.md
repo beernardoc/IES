@@ -3,6 +3,7 @@
 # Lab 1
 
 Autor: Bernardo Pinto
+
 NMEC: 105926
 
 ##  1.1 Basic setup for Java development
