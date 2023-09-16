@@ -5,7 +5,7 @@
 Autor: Bernardo Pinto
 NMEC: 105926
 
-##  1.1
+##  1.1 Basic setup for Java development
 
 **Atualizar versao do maven editando o .bashrc:**
 
@@ -26,7 +26,7 @@ Onde:
 
 
 
-## 1.2
+## 1.2 Build management with the Maven tool
 
 Após a criação do Projeto utilizando o comando:
 
@@ -52,7 +52,17 @@ Em seguida compila e executa o projeto através da linha de comando:
 
 - mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter"
 
-## 1.3
+## 1.3  Source code management using Git
+
+Foi adicionado o projeto do Ex1.2 ao repositório do git, através de um clone local e os comandos básicos de git. Entre eles:
+
+- git clone
+- git pull
+- git add
+- git commit
+- git push
+- ...
+
 
 
 
