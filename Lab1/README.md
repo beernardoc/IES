@@ -65,6 +65,38 @@ Foi adicionado o projeto do Ex1.2 ao repositório do git, através de um clone l
 - ...
 
 
+## 1.4 Introduction to Docker
+
+**set up the Docker repository:**
+
+- sudo apt-get update
+- sudo apt-get install ca-certificates curl gnupg
+- sudo install -m 0755 -d /etc/apt/keyrings
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+- sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+**Instalação do package:**
+
+- sudo apt-get install ./docker-desktop-4.23.0-amd64.deb
+
+**Abrindo Docker Desktop:**
+
+- systemctl --user start docker-desktop
+
+**Instalar Portainer CE com Docker e comandos importantes**
+
+- docker volume create portainer_data
+- docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+- docker ps:
+
+<pre>
+CONTAINER ID   IMAGE                           COMMAND        CREATED          STATUS          PORTS                                                      NAMES
+a698f35562d4   portainer/portainer-ce:latest   "/portainer"   19 minutes ago   Up 19 minutes   0.0.0.0:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, 9000/tcp   portainer
+</pre>
+
+**TODO**
+- descobrir o erro ao tentar executar o exemplo em https://docs.docker.com/compose/gettingstarted/ 
+
 
 
 
