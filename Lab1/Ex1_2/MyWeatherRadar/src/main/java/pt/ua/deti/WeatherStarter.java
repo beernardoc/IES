@@ -12,6 +12,14 @@ public class WeatherStarter {
 
     public static void  main(String[] args ) {
 
+
+        if(args.length != 1){
+            System.out.println("Informe o ID desejado");
+            System.exit(1);
+        }
+
+
+
         // get a retrofit instance, loaded with the GSon lib to convert JSON into objects
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.ipma.pt/open-data/")
@@ -21,9 +29,12 @@ public class WeatherStarter {
         // create a typed interface to use the remote API (a client)
         IpmaService service = retrofit.create(IpmaService.class);
         // prepare the call to remote endpoint
-        Call<IpmaCityForecast> callSync = service.getForecastForACity(CITY_ID_AVEIRO);
+
 
         try {
+            int cityID = Integer.parseInt(args[0]);
+            Call<IpmaCityForecast> callSync = service.getForecastForACity(cityID);
+
             Response<IpmaCityForecast> apiResponse = callSync.execute();
             IpmaCityForecast forecast = apiResponse.body();
 
@@ -33,9 +44,12 @@ public class WeatherStarter {
                 System.out.printf( "max temp for %s is %4.1f %n",
                         firstDay.getForecastDate(),
                         Double.parseDouble(firstDay.getTMax()));
+
             } else {
                 System.out.println( "No results for this request!");
             }
+
+            System.exit(0);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

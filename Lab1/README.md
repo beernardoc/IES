@@ -53,6 +53,14 @@ Em seguida compila e executa o projeto através da linha de comando:
 
 - mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter"
 
+*K)* Em seguida o código foi alterado para aceitar, através do arg da linha de comando, o ID da cidade desejada pelo cliente.
+
+- ex) mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="100"
+
+O utilizador quer que o programe retorne a informação referente a cidade 100.
+
+
+
 ## 1.3  Source code management using Git
 
 Foi adicionado o projeto do Ex1.2 ao repositório do git, através de um clone local e os comandos básicos de git. Entre eles:
@@ -94,8 +102,6 @@ CONTAINER ID   IMAGE                           COMMAND        CREATED          S
 a698f35562d4   portainer/portainer-ce:latest   "/portainer"   19 minutes ago   Up 19 minutes   0.0.0.0:8000->8000/tcp, 0.0.0.0:9443->9443/tcp, 9000/tcp   portainer
 </pre>
 
-**TODO**
-- descobrir o erro ao tentar executar o exemplo em https://docs.docker.com/compose/gettingstarted/ 
 
 
 
