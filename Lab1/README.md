@@ -119,5 +119,50 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 
 ## 1.5 Wrapping-up & integrating concepts
 
+Inicialmente, tomando como base o exercício 1.2, foram criados dois projetos Maven independentes:
 
+- AnyCityForecast: Contém a classe principal WeatherStarter responsável por toda a interação com o utilizador
+
+- IpmaApiClient: Contém 3 classes disponibilizadas anteriormente (CityForecast, IpmaCityForecast e IpmaService) e uma classe nova "consume".
+
+Vale ressaltar que os novos métodos da classe **consume** surgiram para que a classe que interage com o utilizador não realizasse nenhum tipo de comunicação direta com a API.
+
+Por exemplo:
+
+<pre>
+public static Retrofit getRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://api.ipma.pt/open-data/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        CreateInterface(retrofit); 
+
+        return retrofit;
+    }
+
+    public static IpmaService CreateInterface(Retrofit retrofit){
+        return retrofit.create(IpmaService.class);
+    }
+
+    </pre>
+
+
+O código acima anteriormente (Ex1.2) fazia parte da classe WeatherStarter que, além de interagir com o utilizador, também realizava a comunicação com a API.
+
+Além disso, para que os dois projetos independentes fossem integrados, no [pom.xml](Ex1_5/AnyCityForecast/pom.xml) do projeto AnyCityForecast foi feita a referência para o projeto que comunica com a API (IpmaApiClient) para que ambos pudessem trabalhar em conjuntos.
+
+
+    <dependency>
+             <groupId>pt.ua.deti</groupId>
+            <artifactId>IpmaApiClient</artifactId>
+            <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+
+### Comandos importantes:
+
+- mvn install (para o projeto IpmaApiClient)
+- mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="1010500" (para o projeto AnyCityForecast)
+- ls ~/.m2/repository/pt/ua/deti/IpmaApiClient  / (confirmar as dependencias entre projetos)
 
