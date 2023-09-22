@@ -13,11 +13,6 @@ public class WeatherStarter {
     public static void  main(String[] args ) {
 
 
-        if(args.length != 1){
-            System.out.println("Informe o ID desejado");
-            System.exit(1);
-        }
-
 
 
         // get a retrofit instance, loaded with the GSon lib to convert JSON into objects
