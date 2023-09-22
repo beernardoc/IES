@@ -5,7 +5,7 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copie o arquivo JAR compilado para o diretório /app
-COPY target/AnyCityForecast-1.0-SNAPSHOT.jar /app/app.jar
+COPY target/AnyCityForecast-1.0-SNAPSHOT.jar /app/AnyCityForecast-1.0-SNAPSHOT.jar
 
 # Comando para executar o aplicativo Java
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "AnyCityForecast-1.0-SNAPSHOT.jar"]
