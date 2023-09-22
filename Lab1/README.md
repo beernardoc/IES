@@ -1,4 +1,4 @@
-# Lab 1
+# Lab 1 - Notes
 
 Autor: Bernardo Pinto
 
@@ -6,12 +6,12 @@ NMEC: 105926
 
 ## 1.1 Configuração básica para desenvolvimento Java
 
-**Atualizar a versão do Maven editando o .bashrc:**
+### Atualizar a versão do Maven editando o .bashrc:
 
 - `MAVEN_HOME=...` (diretório da pasta do Maven-3.9.4)
 - `PATH=$MAVEN_HOME/bin:$PATH`
 
-**Comando para criar um projeto Maven na linha de comando:**
+### Comando para criar um projeto Maven na linha de comando:
 
 - `$ mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 
@@ -38,14 +38,14 @@ Importa-se os códigos disponibilizados pelo regente para o consumo da API e, em
 
 **Implementação inicial:** https://gist.github.com/icoPT/8b378e03244d07e11645a97fa1857d7c
 
-Em seguida, compila e executa o projeto através da linha de comando:
+### Em seguida, compila e executa o projeto através da linha de comando:
 
 - `$ mvn package`
 - `$ mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter"`
 
-#### K) Change the implementation to receive the city code as a parameter in the command line and print the forecast information in a more complete and user-friendly way.
+**K) Change the implementation to receive the city code as a parameter in the command line and print the forecast information in a more complete and user-friendly way.**
 
-- Exemplo: mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" `-Dexec.args="100"`
+- Exemplo: `mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="100"`
 
 Isso permitirá que o usuário receba informações sobre a cidade com o código 100.
 
@@ -62,7 +62,7 @@ Isso permitirá que o usuário receba informações sobre a cidade com o código
 
 ## 1.4 Introdução ao Docker
 
-**Configurando o repositório do Docker:**
+### Configurando o repositório do Docker:
 
 - `sudo apt-get update`
 - `sudo apt-get install ca-certificates curl gnupg`
@@ -70,15 +70,15 @@ Isso permitirá que o usuário receba informações sobre a cidade com o código
 - `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg`
 - `sudo chmod a+r /etc/apt/keyrings/docker.gpg`
 
-**Instalação do package:**
+### Instalação do package:
 
 - `sudo apt-get install ./docker-desktop-4.23.0-amd64.deb`
 
-**Iniciando o Docker Desktop:**
+### Iniciando o Docker Desktop:
 
 - `systemctl --user start docker-desktop`
 
-**Instalando o Portainer CE com Docker e comandos importantes:**
+### Instalando o Portainer CE com Docker e comandos importantes:
 
 - `docker volume create portainer_data`
 - `docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest`
@@ -96,16 +96,18 @@ a698f35562d4   portainer/portainer-ce:latest   "/portainer"   19 minutes ago   U
 
 ### Múltiplos serviços (Docker Compose)
 
-Primeiro, foram implementados 4 arquivos:
+(Exercício proposto pela **Documentação do Docker**)
+
+#### Primeiro, foram implementados 4 arquivos:
 
 - `app.py`
 - `requirements.txt`
 - `Dockerfile`
 - `docker-compose.yaml`
 
-Em seguida, foi adicionado ao `compose.yaml` código para realizar o *bind mount*.
+#### Em seguida, foi adicionado ao `compose.yaml` código para realizar o *bind mount*.
 
-- *Bind mount*: Isso garante que o processo de rebuild não seja necessário. Ou seja, quando o código-fonte for alterado, ele será imediatamente atualizado para o cliente.
+- `*Bind mount*: Isso garante que o processo de rebuild não seja necessário. Ou seja, quando o código-fonte for alterado, ele será imediatamente atualizado para o cliente.`
 
 **$ docker ps**
 
@@ -119,15 +121,15 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS  
 
 ## 1.5 Wrapping-up & integrating concepts
 
-Inicialmente, tomando como base o exercício 1.2, foram criados dois projetos Maven independentes:
+### Inicialmente, tomando como base o exercício 1.2, foram criados dois projetos Maven independentes:
 
-- AnyCityForecast: Contém a classe principal WeatherStarter responsável por toda a interação com o utilizador
+- AnyCityForecast: `Contém a classe principal WeatherStarter responsável por toda a interação com o utilizador`
 
-- IpmaApiClient: Contém 3 classes disponibilizadas anteriormente (CityForecast, IpmaCityForecast e IpmaService) e uma classe nova "consume".
+- IpmaApiClient: `Contém 3 classes disponibilizadas anteriormente (CityForecast, IpmaCityForecast e IpmaService) e uma classe nova "consume".`
 
 Vale ressaltar que os novos métodos da classe **consume** surgiram para que a classe que interage com o utilizador não realizasse nenhum tipo de comunicação direta com a API.
 
-Por exemplo:
+**Por exemplo:**
 
 <pre>
 public static Retrofit getRetrofit() {
@@ -148,7 +150,7 @@ public static Retrofit getRetrofit() {
     </pre>
 
 
-O código acima anteriormente (Ex1.2) fazia parte da classe WeatherStarter que, além de interagir com o utilizador, também realizava a comunicação com a API.
+O código acima anteriormente (Ex1.2) fazia parte da classe [WeatherStarter](Ex1_2/MyWeatherRadar/src/main/java/pt/ua/deti/WeatherStarter.java) que, além de interagir com o utilizador, também realizava a comunicação com a API.
 
 Além disso, para que os dois projetos independentes fossem integrados, no [pom.xml](Ex1_5/AnyCityForecast/pom.xml) do projeto AnyCityForecast foi feita a referência para o projeto que comunica com a API (IpmaApiClient) para que ambos pudessem trabalhar em conjuntos.
 
@@ -160,9 +162,40 @@ Além disso, para que os dois projetos independentes fossem integrados, no [pom.
     </dependency>
 
 
-### Comandos importantes:
+### Dockerize:
 
-- mvn install (para o projeto IpmaApiClient)
-- mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="1010500" (para o projeto AnyCityForecast)
-- ls ~/.m2/repository/pt/ua/deti/IpmaApiClient  / (confirmar as dependencias entre projetos)
+- `Inicialmente foi criado o arquivo [Dockerfile](Ex1_5/AnyCityForecast/Dockerfile) que é responsável por definir e criar a imagem do Docker`
+
+
+- `Em seguida foi executado o comando build para, através do Dockerfile, criar a imagem em si.`
+<pre>
+docker build -t anycityforecast-app .
+</pre>
+
+- `Por último, foi executado o Container através do comando:`
+
+<pre>
+docker run -d anycityforecast-app
+</pre>
+
+
+### Logs
+<pre>
+2023-09-22 23:18:28 No results for city 9273072
+2023-09-22 23:18:48 No results for city 2141681
+2023-09-22 23:22:33 No results for city 2770668
+2023-09-22 23:22:53 No results for city 2821822
+2023-09-22 23:23:14 No results for city 9644853
+2023-09-22 23:23:34 No results for city 9938316
+2023-09-22 23:23:54 No results for city 8517311
+2023-09-22 23:24:14 No results for city 4896634
+</pre>
+
+Vale ressaltar que, como a lógica do exércicio gerava ID's aleatório, nessa execusão não foram encontrados resultados para as cidades solicitadas
+### Outros comandos importantes:
+
+- `mvn install (para o projeto IpmaApiClient)`
+- `mvn exec:java -Dexec.mainClass="pt.ua.deti.WeatherStarter" -Dexec.args="1010500" (para o projeto AnyCityForecast)`
+- `ls ~/.m2/repository/pt/ua/deti/IpmaApiClient  / (confirmar as dependencias entre projetos)`
+- `docker logs +id`
 
