@@ -1,0 +1,9 @@
+version: '3'
+services:
+  tomcat:
+    image: tomcat:9.0.80-jdk11-corretto-al2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target/JakartaWebStarter-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/JakartaWebStarter-1.0-SNAPSHOT.war
+
