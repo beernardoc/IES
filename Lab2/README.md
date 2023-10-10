@@ -84,6 +84,24 @@ Exemplos de URLs:
 
 **Nota:** Adiona-se o arquivo `index.html` na rota `static` para que o Spring Boot encontre o arquivo e utilize como página inicial.
 
-### C) JSON result
+### C) Building a RESTful Web Service
 
-...
+O desenvolvimento do exercício 2.3c foi feito com base no tutorial disponibilizado neste [artigo](https://spring.io/guides/gs/rest-service/).
+
+- Foi utilizado o Spring Initializr para criar o projeto e alocar suas dependências necessárias, nomeadatamente a dependência para desenvolvimento Web.
+- Em seguida, foi implementada a classe [Greeting](Ex2_3/2_3C/rest-service/src/main/java/com/example/restservice/Greeting.java) responsável por instanciar o objeto. O objeto contém um atributo `id` que é incrementado a cada nova solicitação `GET`, e um atributo `content` que é passado como parâmetro no construtor.
+- Posteriormente, utilizando a marcação  `@RestController`, foi implementado o [GreetingController](Ex2_3/2_3C/rest-service/src/main/java/com/example/restservice/GreetingController.java), que permite a criação de um objeto do tipo Greeting e retorna o objeto com o atributo `content` igual ao parâmetro `name` passado na URL, caso o parâmetro seja passado. Caso contrário, retorna o objeto com o atributo `content` igual a "World".
+- Por fim, foi feita a compilação e build do projeto para criar o arquivo necessário para executar o comando `./mvnw spring-boot:run` e iniciar o servidor.
+
+**Exemplo:**
+
+****curl -v http://localhost:8080/greeting****
+```JSON
+{"id":1,"content":"Hello, World!"}
+```
+
+****curl -v http://localhost:8080/greeting?name=IES****
+
+```JSON
+{"id":2,"content":"Hello, IES!"}
+```
