@@ -105,3 +105,39 @@ O desenvolvimento do exercício 2.3c foi feito com base no tutorial disponibiliz
 ```JSON
 {"id":2,"content":"Hello, IES!"}
 ```
+
+## 2.4 Wrapping-up & integrating concepts
+
+A implementação do exercício 2.4 é relativamente parecida com o exercício anterior, com diferença na quantidade de objetos e na forma como são retornados.
+
+- Inicialmente foram criadas as classes [Movie](Ex2_4/rest-service/src/main/java/com/example/restservice/Movie.java), [Show](Ex2_4/rest-service/src/main/java/com/example/restservice/Show.java) e [Quote](Ex2_4/rest-service/src/main/java/com/example/restservice/Quote.java).
+- Em seguida, foi implementada a classe [Controller](Ex2_4/rest-service/src/main/java/com/example/restservice/Controller.java) com os métodos `app()`, que é responsável por instanciar os objetos que serão utilizados. e o método `RandomQuote()`, que retorna um objeto do tipo `Quote` com uma citação aleatória.
+- Então foram desenvolvidas os métodos que, através da marcação `@GetMapping`, recebem as solicitações e retornam os objetos correspondentes.
+- Por fim, foi criada a classe [RestServiceApplication](Ex2_4/rest-service/src/main/java/com/example/restservice/RestServiceApplication.java) que permite a execução do programa e a inserção dos dados ficticios.
+
+
+http://localhost:8080/api/quote (Random Quote)
+```JSON
+{"quote":"Winter is coming."}
+
+```
+
+http://localhost:8080/api/movies
+```JSON
+[{"name":"Inception","id":2},{"name":"Pulp Fiction","id":3},{"name":"The Matrix","id":1}]
+```
+
+http://localhost:8080/api/shows
+```JSON
+[{"name":"Stranger Things","id":4},{"name":"Game of Thrones","id":5}]
+```
+
+http://localhost:8080/api/quotes
+```JSON
+{"Stranger Things":[{"quote":"Demogorgon in the mist!"},{"quote":"Eleven is the best!"}],"The Matrix":[{"quote":"There is no spoon."},{"quote":"I know kung fu."}],"Pulp Fiction":[{"quote":"Say 'what' again!"},{"quote":"Ezekiel 25:17"}],"Game of Thrones":[{"quote":"Winter is coming."},{"quote":"You know nothing, Jon Snow."}],"Inception":[{"quote":"You mustn't be afraid to dream a little bigger, darling."},{"quote":"Dreams feel real while we're in them."}]}
+```
+
+http://localhost:8080/api/quotes?show=3
+```JSON
+{"Pulp Fiction":[{"quote":"Say 'what' again!"},{"quote":"Ezekiel 25:17"}]}
+``` 
