@@ -19,13 +19,17 @@ public class User {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
+    @NotBlank(message = "Phone is mandatory")
+    private String phone;
+
     // standard constructors / setters / getters / toString
 
     public User() {}
 
-    public User(String name, String email) {
+    public User(String name, String email, String phone) {
         this.name = name;
         this.email = email;
+        this.phone = phone;
     }
 
 
@@ -49,6 +53,14 @@ public class User {
 
     public String getEmail(){
         return email;
+    }
+
+    public void setPhone(String phone){
+        this.phone = phone;
+    }
+
+    public String getPhone(){
+        return phone;
     }
 
 
