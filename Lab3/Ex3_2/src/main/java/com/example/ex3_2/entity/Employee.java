@@ -1,5 +1,4 @@
-package com.example.app.entity;
-
+package com.example.ex3_2.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

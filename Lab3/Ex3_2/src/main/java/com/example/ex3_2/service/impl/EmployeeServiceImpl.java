@@ -1,8 +1,8 @@
-package com.example.app.service.impl;
+package com.example.ex3_2.service.impl;
+import com.example.ex3_2.entity.Employee;
+import com.example.ex3_2.repository.EmployeeRepository;
+import com.example.ex3_2.service.EmployeeService;
 
-import com.example.app.entity.Employee;
-import com.example.app.repository.EmployeeRepository;
-import com.example.app.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class EmployeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
 
     private EmployeeRepository employeeRepository;
 

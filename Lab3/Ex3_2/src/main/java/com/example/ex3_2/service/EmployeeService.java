@@ -1,6 +1,6 @@
-package com.example.app.service;
+package com.example.ex3_2.service;
 
-import com.example.app.entity.Employee;
+import com.example.ex3_2.entity.Employee;
 
 import java.util.List;
 

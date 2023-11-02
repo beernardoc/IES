@@ -1,8 +1,8 @@
-package com.example.app.controller;
+package com.example.ex3_2.controller;
 
 
-import com.example.app.entity.Employee;
-import com.example.app.service.EmployeeService;
+import com.example.ex3_2.service.EmployeeService;
+import com.example.ex3_2.entity.Employee;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +41,7 @@ public class EmployeeController {
     @PutMapping("{id}")
     // http://localhost:8080/api/users/1
     public ResponseEntity<Employee> updateUser(@PathVariable("id") Long userId,
-                                           @RequestBody Employee employee){
+                                               @RequestBody Employee employee){
         employee.setId(userId);
         Employee updatedEmployee = employeeService.updateEmployee(employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
