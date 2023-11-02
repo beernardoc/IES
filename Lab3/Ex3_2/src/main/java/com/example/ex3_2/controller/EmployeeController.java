@@ -54,4 +54,10 @@ public class EmployeeController {
         return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
     }
 
+    @GetMapping("/byemail")
+    public ResponseEntity<List<Employee>> findByEmail(@RequestParam String email){
+        List<Employee> employees = employeeService.findByEmail(email);
+        return new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+
 }

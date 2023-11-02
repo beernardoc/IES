@@ -48,4 +48,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
 
     }
+
+    public List<Employee> findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+
+
 }

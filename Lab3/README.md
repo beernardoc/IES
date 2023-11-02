@@ -49,3 +49,91 @@ private String email;
 
 
 ## 3.2 Accessing databases in SpringBoot
+
+**Primeiramente foi criado o Container Docker com a base de dados MySQL, através do comando:**
+
+```bash
+$ docker run --name mysql5 -e MYSQL_ROOT_PASSWORD=secret1 -e MYSQL_DATABASE=demo -e MYSQL_USER=demo -e MYSQL_PASSWORD=secret2 -p 33060:3306 -d mysql/mysql-server:8.0.34
+```
+
+**A base de dados pode ser acedida através do comando:**
+
+```bash
+$ docker exec -it mysql5 bash
+```
+
+**Em seguida foi criado um projeto SpringBoot com o Spring Initializr e foram importadas as seguintes dependências: Web, JPA, MySQL, DevTools e validation.**
+
+
+**Então foi criada a entidade `Employee`, o controller `EmployeeController`, o repositório `EmployeeRepository` e 'EmployeeService' que implementa a interface `EmployeeServiceInterface` e permite a comunicação entre o controller e o repositório.**
+
+**Já no ficheiro `application.properties` foram definidas as configurações da base de dados:**
+
+```properties
+# MySQL
+spring.datasource.url=jdbc:mysql://127.0.0.1:33060/demo
+spring.datasource.username=demo
+spring.datasource.password=secret2
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+# Strategy to auto update the schemas (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto = update
+``` 
+
+### G) Para testar a aplicação utilizei o curl para fazer os pedidos HTTP, por exemplo:
+
+**1. List all employees:**
+
+```bash 
+$ curl -X GET http://localhost:8080/api/employees
+```
+
+**2. Create a new employee:**
+
+```bash
+$ curl -X POST -H "Content-Type: application/json" -d '{"name": "Bernardo", "email": "bernardo@ua.pt"}' http://localhost:8080/api/employees
+
+```
+
+### H) Para inserir um novo método de pesquisa por email foi necessário:
+
+**- Adicionar o método `findByEmail()` na interface `EmployeeRepository`:**
+
+```java
+List<Employee> findByEmail(String email);
+```
+
+**- Adicionar o método `findByEmail()` na interface `EmployeeService` e implementá-lo na classe `EmployeeServiceImpl`:**
+
+```java
+// EmployeeService.java
+List<Employee> findByEmail(String email);
+
+// EmployeeServiceImpl.java
+public List<Employee> findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+```
+
+**- Adicionar o método `findByEmail()` no controller `EmployeeController`:**
+
+```java
+@GetMapping("/byemail")
+    public ResponseEntity<List<Employee>> findByEmail(@RequestParam String email){
+        List<Employee> employees = employeeService.findByEmail(email);
+        return new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+```
+
+*A rota `/byemail` foi escolhida para não entrar em conflito com a rota principal que está em uso no `getAllEmployees`.*
+
+**Por fim foi possivel testar o novo método de pesquisa:**
+
+```URL
+http://localhost:8080/api/employees/byemail?email=bernardopinto@ua.pt
+```
+
+resultado:
+
+```json
+[{"id":52,"name":"Bernardo","email":"bernardopinto@ua.pt"}]
+``` 
