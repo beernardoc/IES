@@ -56,6 +56,10 @@ public class EmployeeController {
 
     @GetMapping("/byemail")
     public ResponseEntity<List<Employee>> findByEmail(@RequestParam String email){
+        if(email == null || email.isEmpty()){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
         List<Employee> employees = employeeService.findByEmail(email);
         return new ResponseEntity<>(employees,HttpStatus.OK);
     }
