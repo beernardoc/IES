@@ -137,3 +137,18 @@ resultado:
 ```json
 [{"id":52,"name":"Bernardo","email":"bernardopinto@ua.pt"}]
 ``` 
+
+
+## 3.3 Wrapping-up and integrating concepts
+
+**De forma semelhante ao exercício anterior foi criada uma pasta `entity` com a classe `Quote`, uma pasta `repository` com a interface `QuoteRepository`, uma pasta `service` com a interface `QuoteService` e a classe `QuoteServiceImpl` que implementa a interface `QuoteService`.**
+
+**Já no ficheiro `application.properties` foram definidas as configurações da base de dados:**
+
+**Dessa forma foi possível criar uma nova entidade `Quote` e persistir os dados no mysql.**
+
+**`docker exec -it mysql5 bash` garante a interação com o container mysql e ajuda a verificar a persistência dos dados.**
+
+***TODO: Dockerize da aplicação***
+
+
